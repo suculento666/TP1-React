@@ -1,16 +1,23 @@
-import React from 'react'
+export default function Cita({ cita, setCitas }) {
+  const eliminarCita = () => {
+    setCitas((citasActuales) =>
+      citasActuales.filter((citaActual) => citaActual.id !== cita.id)
+    )
+  }
 
-export default function Cita({cita}) {
-    const {nombre, dueño, fecha, hora, sintomas} = cita;
   return (
-    
-      <div className="cita">
-        <p>Mascota: <span>{nombre}</span></p>
-        <p>Dueño: <span>{dueño}</span></p>
-        <p>Fecha: <span>{fecha}</span></p>
-        <p>Hora: <span>{hora}</span></p>
-        <p>Sintomas: <span>{sintomas}</span></p>
-        <button className="button eliminar u-full-width">Eliminar ×</button>
-      </div>      
+    <div className="cita">
+      <p>Mascota: {cita.mascota}</p>
+      <p>Dueño: {cita.propietario}</p>
+      <p>Fecha: <span>{cita.fecha}</span></p>
+      <p>Hora: <span>{cita.hora}</span></p>
+      <p>Síntomas: <span>{cita.sintomas}</span></p>
+      <button
+        className="button eliminar u-full-width"
+        onClick={eliminarCita}
+      >
+        Eliminar X
+      </button>
+    </div>
   )
 }
