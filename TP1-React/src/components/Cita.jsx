@@ -8,7 +8,7 @@ export default function Cita({ cita, setCitas }) {
   return (
     <div className="cita">
       <p>Mascota: {cita.mascota}</p>
-      <p>Dueño: {cita.propietario}</p>
+      <p>Dueño: {cita.dueño}</p>
       <p>Fecha: <span>{cita.fecha}</span></p>
       <p>Hora: <span>{cita.hora}</span></p>
       <p>Síntomas: <span>{cita.sintomas}</span></p>

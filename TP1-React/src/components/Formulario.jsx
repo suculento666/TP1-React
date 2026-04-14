@@ -1,16 +1,19 @@
 import { useState } from "react";
 
-
-function Formulario() {
+function Formulario({agregarCita}) {
     const [mascota, setMascota] = useState("");
     const [dueño, setdueño] = useState("");
     const [fecha, setFecha] = useState("");
     const [hora, setHora] = useState("");
-    const [sintomas, setSintomas] = useState("");
-    const [citas, setCitas] = useState([]);
+    const [sintomas, setSintomas] = useState("");    
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!mascota || !dueño || !fecha || !hora || !sintomas) {
+            alert("Por favor, rellena todos los campos.");
+            return;
+        }
 
         const nuevaCita = {
             id: Date.now(),
@@ -21,7 +24,7 @@ function Formulario() {
             sintomas,
         };
 
-        setCitas([...citas, nuevaCita]);
+        agregarCita(nuevaCita);
 
         setMascota("");
         setdueño("");
@@ -31,71 +34,49 @@ function Formulario() {
     };
 
     return (
-        <div>
+        <>
             <h2>Crear nueva cita</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Nombre de la mascota</label>
-                    <input
-                        type="text"
-                        value={mascota}
-                        onChange={(e) => setMascota(e.target.value)}
-                    />
-                </div>
-
-                <div>
-                    <label>Nombre del dueño</label>
-                    <input
-                        type="text"
-                        value={dueño}
-                        onChange={(e) => setdueño(e.target.value)}
-                    />
-                </div>
-
-                <div>
-                    <label>Fecha</label>
-                    <input
-                        type="date"
-                        value={fecha}
-                        onChange={(e) => setFecha(e.target.value)}
-                    />
-                </div>
-
-                <div>
-                    <label>Hora</label>
-                    <input
-                        type="time"
-                        value={hora}
-                        onChange={(e) => setHora(e.target.value)}
-                    />
-                </div>
-
-                <div>
-                    <label>Síntomas</label>
-                    <textarea
-                        value={sintomas}
-                        onChange={(e) => setSintomas(e.target.value)}
-                    />
-                </div>
-
-                <button type="submit">Agregar cita</button>
-            </form>
-
-            {citas.length > 0 && (
-                <div>
-                    <h3>Lista de citas</h3>
-                    <ul>
-                        {citas.map((cita) => (
-                            <li key={cita.id}>
-                                <strong>{cita.mascota}</strong> - {cita.dueño} - {cita.fecha}{" "}
-                                {cita.hora} - {cita.sintomas}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </div>
-    );
+            <form onSubmit={handleSubmit}>                
+                <label>Nombre de la mascota</label>
+                <input
+                    type="text"
+                    value={mascota}
+                    className="u-full-width"
+                    onChange={(e) => setMascota(e.target.value)}
+                />                                
+                <label>Nombre del dueño</label>
+                <input
+                    type="text"
+                    value={dueño}
+                    className="u-full-width"
+                    onChange={(e) => setdueño(e.target.value)}
+                />                
+                
+                <label>Fecha</label>
+                <input
+                    type="date"
+                    value={fecha}
+                    className="u-full-width"
+                    onChange={(e) => setFecha(e.target.value)}
+                />                
+                <label>Hora</label>
+                <input
+                    type="time"
+                    className="u-full-width"
+                    value={hora}
+                    onChange={(e) => setHora(e.target.value)}
+                />                
+                <label>Síntomas</label>
+    <textarea
+        value={sintomas}
+        className="u-full-width"
+        onChange={(e) => setSintomas(e.target.value)}
+    />
+    <button type="submit" className="u-full-width button-primary">Agregar Cita</button>
+</form>
+    </>
+  )
 }
+
 
 export default Formulario;
